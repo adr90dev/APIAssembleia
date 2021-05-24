@@ -11,12 +11,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Pauta {
 
-//	public Pauta(@NotBlank String historico, @NotBlank String tema, Cabecalho cabecalho) {
-//		this.cabecalho = cabecalho;
-//		this.tema = tema;
-//		this.historico = historico;
-//	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -38,7 +32,11 @@ public class Pauta {
 
 	}
 
-	public Pauta(@NotBlank String tema, @NotBlank String historico) {
+	public Pauta(Long id, @NotBlank String nomeQuemAbriu, @NotBlank LocalDateTime dataDeAbertura, @NotBlank String tema,
+			@NotBlank String historico) {
+		this.id = id;
+		this.nomeQuemAbriu = nomeQuemAbriu;
+		this.dataDeAbertura = dataDeAbertura;
 		this.tema = tema;
 		this.historico = historico;
 	}

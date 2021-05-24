@@ -32,7 +32,7 @@ public class PautaController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> cadastraPauta(@RequestBody @Valid NovaPautaRequest request) {
+	public ResponseEntity<?> cadastrar(@RequestBody @Valid NovaPautaRequest request) {
 		Pauta pauta = request.toPauta();
 		pautaRepository.save(pauta);
 
@@ -41,26 +41,26 @@ public class PautaController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> listaPauta() {
+	public ResponseEntity<?> listar() {
 		List<Pauta> pauta = pautaRepository.findAll();
 
 		return ResponseEntity.ok(pauta);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> listaPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
 		Optional<Pauta> pauta = pautaRepository.findById(id);
 
 		return ResponseEntity.ok(pauta);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Pauta> put (@RequestBody Pauta postagem){
+	public ResponseEntity<Pauta> atualizar(@RequestBody Pauta postagem) {
 		return ResponseEntity.status(HttpStatus.OK).body(pautaRepository.save(postagem));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long id) {
+	public void deletar(@PathVariable long id) {
 		pautaRepository.deleteById(id);
 	}
 }

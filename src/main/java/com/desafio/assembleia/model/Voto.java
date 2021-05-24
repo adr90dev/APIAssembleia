@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.springframework.util.Assert;
 
@@ -18,10 +20,13 @@ public class Voto {
 
 	private OpcaoVoto opcaoVoto;
 
+	@ManyToOne
 	private Sessao sessao;
 
+	@OneToOne
 	private Associado idAssociado;
 
+	@ManyToOne
 	private Pauta pauta;
 
 	public Voto(Long id, OpcaoVoto opcaoVoto, Sessao sessao, Associado idAssociado, Pauta pauta) {

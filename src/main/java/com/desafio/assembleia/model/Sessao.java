@@ -3,10 +3,14 @@ package com.desafio.assembleia.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,12 +25,15 @@ public class Sessao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@OneToOne
 	private Pauta pauta;
 	
+	@ManyToOne
 	private Associado associado;
 	
 	private OpcaoVoto opcaoVoto;
 	
+	@OneToMany(mappedBy = "sessao", cascade = CascadeType.PERSIST)
 	private Set<Voto> votos = new HashSet<>();
 	
 	public Sessao (Pauta pauta, Associado associado, OpcaoVoto opcaoVoto, Set<Voto> votos) {
@@ -61,9 +68,4 @@ public class Sessao {
 		Thread.sleep(150);
 	}
 	
-//	public void adicionaVoto(RetornoOpcaoVoto request, Associado associado) {
-//		Voto voto = request.toVoto(this);
-//		
-//		this.votos.add(voto);
-//	}
 }

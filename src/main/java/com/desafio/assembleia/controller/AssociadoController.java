@@ -3,6 +3,8 @@ package com.desafio.assembleia.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,16 +28,16 @@ public class AssociadoController {
 
 	@Autowired
 	private AssociadoRepository associadoRepository;
-	
+
 	@PostMapping
-	public ResponseEntity<?> cadastrar(NovoAssociadoRequest request){
+	public ResponseEntity<?> cadastrar(@RequestBody @Valid NovoAssociadoRequest request) {
 		Associado associado = request.toAssociado();
 		associadoRepository.save(associado);
-		
+
 		AssociadoResponse response = new AssociadoResponse(associado);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> listar() {
 		List<Associado> associado = associadoRepository.findAll();
@@ -44,17 +46,17 @@ public class AssociadoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> listaPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
 		Optional<Associado> associado = associadoRepository.findById(id);
 
 		return ResponseEntity.ok(associado);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Associado> atualizar (@RequestBody Associado associado){
+	public ResponseEntity<Associado> atualizar(@RequestBody Associado associado) {
 		return ResponseEntity.status(HttpStatus.OK).body(associadoRepository.save(associado));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void deletar(@PathVariable long id) {
 		associadoRepository.deleteById(id);
