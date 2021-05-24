@@ -14,16 +14,16 @@ public class Pauta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String nomeQuemAbriu;
-	
+
 	@NotBlank
 	private LocalDateTime dataDeAbertura = LocalDateTime.now();
 
 	@NotBlank
 	private String tema;
-	
+
 	@NotBlank
 	private String historico;
 
@@ -32,9 +32,8 @@ public class Pauta {
 
 	}
 
-	public Pauta(Long id, @NotBlank String nomeQuemAbriu, @NotBlank LocalDateTime dataDeAbertura, @NotBlank String tema,
+	public Pauta(@NotBlank String nomeQuemAbriu, @NotBlank LocalDateTime dataDeAbertura, @NotBlank String tema,
 			@NotBlank String historico) {
-		this.id = id;
 		this.nomeQuemAbriu = nomeQuemAbriu;
 		this.dataDeAbertura = dataDeAbertura;
 		this.tema = tema;
@@ -60,5 +59,5 @@ public class Pauta {
 	public String getNomeQuemAbriu() {
 		return nomeQuemAbriu;
 	}
-	
+
 }

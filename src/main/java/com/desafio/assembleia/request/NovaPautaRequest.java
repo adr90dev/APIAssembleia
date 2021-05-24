@@ -40,7 +40,7 @@ public class NovaPautaRequest {
 	}
 
 	public Pauta toPauta() {
-		return new Pauta(tema, historico);
+		return new Pauta(nomeQuemAbriu, dataDeAbertura, tema, historico);
 	}
 
 	public String getNomeQuemAbriu() {
